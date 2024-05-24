@@ -1,7 +1,17 @@
 console.log("Laptop Script Implemented");
 
 async function download_csv(url) {
-    const resp = await fetch(url)
+    const reqOptions = {
+        headers: new Headers({
+            type: "GET",
+            dataType: 'csv',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+        })
+    }
+    const resp = await fetch(url, reqOptions)
         .then(resp => resp.text())
         .then(value => Papa.parse(value))
         .catch(err => console.log(err));
