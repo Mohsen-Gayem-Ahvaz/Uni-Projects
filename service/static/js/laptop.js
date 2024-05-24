@@ -6,7 +6,7 @@ const laptopInfoUrls = [
 ]
 
 async function download_csv(url) {
-    
+
     const resp = await fetch(url)
         .then(resp => resp.text())
         .then(value => Papa.parse(value))
@@ -15,7 +15,7 @@ async function download_csv(url) {
     return resp
 }
 
-let laptop_data = download_csv(laptopInfoUrls[1]);
+let laptop_data = download_csv(laptopInfoUrls[0]);
 laptop_data.then(value => {
     console.log(value.data)
 })
