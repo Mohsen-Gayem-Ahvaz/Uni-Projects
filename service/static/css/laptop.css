@@ -2,3 +2,27 @@
 :root {
 
 }
+
+body {
+    margin: 0 auto 0;
+}
+
+#laptops-table {
+    width: 60vw;
+    padding: 0px;
+    background-color: #cac9b3;
+}
+
+#laptops-thead th {
+    border: 1px solid #3767a7;
+    border-bottom: 0px;
+    border-radius: 4px 4px 0px 0px;
+    width: 20%;
+    height: 50px;
+    background-color: #3f7e86;
+    padding: 0px;
+    margin: 0px;
+}
+#laptops-tbody td {
+    border: 1px solid #3767a7;
+}
