@@ -17,15 +17,15 @@ async function download_csv(url) {
 }
 
 async function reloadData(){
-    let csvResp = download_csv(laptopInfoUrls[0]);
+    let csvResp = download_csv(laptopInfoUrls[1]);
 
     await csvResp.then((value) => {
         laptopTb = document.getElementById("laptops-tbody");
         laptopData = value.data;
-
-        for (let index = 0; index <= laptopData.length-1; index+=1){
+        laptopData.shift();
+        for (let index = 0; index < 22; index++){
             let currRow = laptopTb.insertRow(index)
-            currRow.insertCell(0).innerHTML = index;
+            currRow.insertCell(0).innerHTML = index+1;
 
             for (let cell = 0; cell <= 5;cell+=1){
                 currRow.insertCell(cell+1).innerHTML = laptopData[index][cell];
