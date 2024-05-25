@@ -23,7 +23,8 @@ async function reloadData(){
         laptopTb = document.getElementById("laptops-tbody");
         laptopData = value.data;
         laptopData.shift();
-        for (let index = 0; index < 22; index++){
+        laptopData.pop();
+        for (let index = 0; index < laptopData.length ; index++){
             let currRow = laptopTb.insertRow(index)
             currRow.insertCell(0).innerHTML = index+1;
 
@@ -34,7 +35,35 @@ async function reloadData(){
         }
     })
 }
-reloadData()
-window.addEventListener("DOMContentLoaded", function() {
-    // reloadData()
+
+function getAvg(){
+    var avgResultEl = document.getElementById("avg-result");
+    let total = 0.0;
+    let avg = 0.0;
+    for (let index = 0; index < laptopTb.rows.length ;index++){
+        let currCell = laptopTb.rows[index].cells[6].innerHTML
+        total += parseFloat(currCell);
+    }
+    avg = total/laptopTb.rows.length;
+    avgResultEl.innerHTML = `Avg : ${avg.toFixed(4)}`;
+    return avg;
+}
+
+function getVariance(){
+    var varianceResultEl = document.getElementById("variance-result");
+    let avg = getAvg();
+    let total = 0.0;
+    let variance = 0.0;
+    for (let index = 0; index < laptopTb.rows.length ;index++){
+        let currCell = laptopTb.rows[index].cells[6].innerHTML;
+        //console.log(`Pow(${parseFloat(currCell)} - ${avg}): ${Math.pow(parseFloat(currCell) - avg, 2)}`);
+        total += Math.pow(parseFloat(currCell) - avg, 2);
+    }
+    variance = total/laptopTb.rows.length;
+    varianceResultEl.innerHTML = `Variance : ${variance.toFixed(4)}`;
+    return variance;
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    await reloadData();
 }, false);

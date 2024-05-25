@@ -9,9 +9,18 @@
 </head>
 <body>
     <div id="table-container">
-        <form id="query-form">
-
-        </form>
+        <div id="query-form">
+            <ul>
+                <li><button id="get-avg" onclick="getAvg()">Avg</button></li>
+                <li><button id="get-variance" onclick="getVariance()">Variance</button></li>
+            </ul>
+        </div>
+        <div id="query-result">
+            <ul>
+                <li id="avg-result">Avg : ?</li>
+                <li id="variance-result">Variance : ?</li>
+            </ul>
+        </div>
 
         <table id="laptops-table">
             <caption>Laptop Prices</caption>
