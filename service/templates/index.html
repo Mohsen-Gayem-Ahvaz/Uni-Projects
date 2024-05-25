@@ -9,21 +9,20 @@
 </head>
 <body>
     <div id="data-container">
-            <form id="query-form">
-                <ul>
-                    <li><button id="get-avg" onclick="getAvg()">Avg</button></li>
-                    <li><button id="get-variance" onclick="getVariance()">Variance</button></li>
-                    <button id="mark-higher" onclick="markHigherPrices()" class="form-btn">MarkHigher</button>
-                    <input type="number" step="0.01" id="higher-price-input"/>
-                    <button id="mark-lower" onclick="markLowerPrices()" class="form-btn">MarkLower</button>
-                    <input type="number" step="0.01" id="lower-price-input"/>
-                </ul>
-            </form>
+        <form id="query-form">
+            <ul>
+                <li><button id="get-avg" onclick="getAvg()">Avg</button></li>
+                <li><button id="get-variance" onclick="getVariance()">Variance</button></li>
+                <button id="mark-higher" onclick="markHigherPrices()" class="form-btn">MarkHigher</button>
+                <input type="number" step="0.01" id="higher-price-input"/>
+                <button id="mark-lower" onclick="markLowerPrices()" class="form-btn">MarkLower</button>
+                <input type="number" step="0.01" id="lower-price-input"/>
+            </ul>
+        </form>
         <div id="query-result">
             <p id="avg-result">Avg : ?</p>
             <p id="variance-result">Variance : ?</p>
         </div>
-
         <div id="laptops-table-container">
             <table id="laptops-table">
                 <caption>Laptop Prices</caption>
