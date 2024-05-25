@@ -8,7 +8,7 @@
     <title>Laptops</title>
 </head>
 <body>
-    <div id="table-container">
+    <div id="data-container">
         <div id="query-form">
             <ul>
                 <li><button id="get-avg" onclick="getAvg()">Avg</button></li>
@@ -22,19 +22,22 @@
             </ul>
         </div>
 
-        <table id="laptops-table">
-            <caption>Laptop Prices</caption>
-            <thead id="laptops-thead">
-            <th scope="col">PID</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Screen Size</th>
-            <th scope="col">RAM</th>
-            <th scope="col">Processor</th>
-            <th scope="col">GPU</th>
-            <th scope="col">Price</th>
-            </thead>
-            <tbody id="laptops-tbody"></tbody>
-        </table>
+        <div id="laptops-table-container">
+            <table id="laptops-table">
+                <caption>Laptop Prices</caption>
+                <thead id="laptops-thead">
+                <th scope="col">PID</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Screen Size</th>
+                <th scope="col">RAM</th>
+                <th scope="col">Processor</th>
+                <th scope="col">GPU</th>
+                <th scope="col">Price</th>
+                </thead>
+                <tbody id="laptops-tbody"></tbody>
+            </table>
+            <div id="laptops-table-loading">Loading...</div>
+        </div>
     </div>
 </body>
 </html>

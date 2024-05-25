@@ -5,6 +5,7 @@ const laptopInfoUrls = [
     "http://127.0.0.1:5050/static/dataset/laptop_info.csv"
 ];
 var laptopTb;
+var laptopTbCont;
 var laptopData = [];
 
 async function download_csv(url) {
@@ -21,6 +22,8 @@ async function reloadData(){
 
     await csvResp.then((value) => {
         laptopTb = document.getElementById("laptops-tbody");
+        laptopTbCont = document.getElementById("laptops-table-container");
+        laptopTbCont.style.display = "none";
         laptopData = value.data;
         laptopData.shift();
         laptopData.pop();
@@ -31,8 +34,8 @@ async function reloadData(){
             for (let cell = 0; cell <= 5;cell+=1){
                 currRow.insertCell(cell+1).innerHTML = laptopData[index][cell];
             }
-
         }
+        laptopTbCont.style.display = "block";
     })
 }
 
