@@ -81,12 +81,13 @@ function markHigherPrices(){
     let higherLimitIndex = ((perc*orderedPrices.length)/100).toFixed(0);
     let higherLimit = orderedPrices[orderedPrices.length - higherLimitIndex]
     for (let index = 0; index < laptopTb.rows.length ;index++){
-        let currCell = laptopTb.rows[index].cells[6];
-        if(window.getComputedStyle(currCell).backgroundColor === "rgb(239, 123, 123)"){
-            currCell.style.backgroundColor = "transparent";
+        let currRow = laptopTb.rows[index]
+        let priceCell = currRow.cells[6];
+        if(window.getComputedStyle(currRow).backgroundColor === "rgb(239, 123, 123)"){
+            currRow.style.backgroundColor = "transparent";
         }
-        if (parseFloat(currCell.innerHTML) >= higherLimit){
-            currCell.style.backgroundColor = "rgb(239, 123, 123)";
+        if (parseFloat(priceCell.innerHTML) >= higherLimit){
+            currRow.style.backgroundColor = "rgb(239, 123, 123)";
         }
     }
 }
@@ -96,12 +97,13 @@ function markLowerPrices(){
     let lowerLimitIndex = ((perc*orderedPrices.length)/100).toFixed(0) - 1;
     let lowerLimit = orderedPrices[lowerLimitIndex]
     for (let index = 0; index < laptopTb.rows.length ;index++){
-        let currCell = laptopTb.rows[index].cells[6];
-        if(window.getComputedStyle(currCell).backgroundColor === "rgb(236, 236, 125)"){
-            currCell.style.backgroundColor = "transparent";
+        let currRow = laptopTb.rows[index]
+        let priceCell = currRow.cells[6];
+        if(window.getComputedStyle(currRow).backgroundColor === "rgb(236, 236, 125)"){
+            currRow.style.backgroundColor = "transparent";
         }
-        if (parseFloat(currCell.innerHTML) <= lowerLimit){
-            currCell.style.backgroundColor = "rgb(236, 236, 125)";
+        if (parseFloat(priceCell.innerHTML) <= lowerLimit){
+            currRow.style.backgroundColor = "rgb(236, 236, 125)";
         }
     }
 }
