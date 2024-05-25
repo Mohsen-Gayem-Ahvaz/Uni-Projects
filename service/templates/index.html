@@ -2,11 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Service</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/papaparse.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/data.js') }}"></script>
+    <title>Laptops</title>
 </head>
 <body>
-    Home View
+    <div id="data-container">
+            <form id="query-form">
+                <ul>
+                    <li><button id="get-avg" onclick="getAvg()">Avg</button></li>
+                    <li><button id="get-variance" onclick="getVariance()">Variance</button></li>
+                    <button id="mark-higher" onclick="markHigherPrices()" class="form-btn">MarkHigher</button>
+                    <input type="number" step="0.01" id="higher-price-input"/>
+                    <button id="mark-lower" onclick="markLowerPrices()" class="form-btn">MarkLower</button>
+                    <input type="number" step="0.01" id="lower-price-input"/>
+                </ul>
+            </form>
+        <div id="query-result">
+            <p id="avg-result">Avg : ?</p>
+            <p id="variance-result">Variance : ?</p>
+        </div>
+
+        <div id="laptops-table-container">
+            <table id="laptops-table">
+                <caption>Laptop Prices</caption>
+                <thead id="laptops-thead">
+                    <th scope="col">PID</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Screen Size</th>
+                    <th scope="col">RAM</th>
+                    <th scope="col">Processor</th>
+                    <th scope="col">GPU</th>
+                    <th scope="col">Price</th>
+                </thead>
+                <tbody id="laptops-tbody"></tbody>
+            </table>
+        </div>
+        <div id="laptops-table-loading">Loading Data ...</div>
+    </div>
 </body>
 </html>

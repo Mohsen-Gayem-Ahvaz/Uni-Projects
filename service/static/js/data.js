@@ -1,13 +1,16 @@
-
-
 const laptopInfoUrls = [
     "http://mohsenga.pythonanywhere.com/static/dataset/laptop_info.csv",
     "http://127.0.0.1:5050/static/dataset/laptop_info.csv"
 ];
-var laptopTb;
-var laptopTbCont;
-var laptopTbLoaing
-var laptopData = [];
+let laptopTb;
+let laptopTbCont;
+let laptopTbLoaing;
+let queryForm;
+let higherPriceInput;
+let lowerPriceInput;
+
+let laptopData = [];
+let orderedPrices = [];
 
 async function download_csv(url) {
     const resp = await fetch(url)
@@ -25,19 +28,18 @@ async function reloadData(){
             console.log(value.errors)
             return;
         }
-        laptopTb = document.getElementById("laptops-tbody");
-        laptopTbCont = document.getElementById("laptops-table-container");
-        laptopTbLoaing = document.getElementById("laptops-table-loading");
+
         laptopData = value.data;
         laptopData.shift();
         laptopData.pop();
         for (let index = 0; index < laptopData.length ; index++){
             let currRow = laptopTb.insertRow(index)
             currRow.insertCell(0).innerHTML = index+1;
-
             for (let cell = 0; cell <= 5;cell+=1){
                 currRow.insertCell(cell+1).innerHTML = laptopData[index][cell];
             }
+            orderedPrices.push(currRow.cells[6].innerHTML);
+            orderedPrices.sort();
         }
         laptopTbLoaing.style.display = "none";
         laptopTbCont.style.display = "block";
@@ -74,6 +76,43 @@ function getVariance(){
     return variance;
 }
 
+function markHigherPrices(){
+    let perc = parseFloat(higherPriceInput.value)
+    let higherLimitIndex = ((perc*orderedPrices.length)/100).toFixed(0);
+    let higherLimit = orderedPrices[orderedPrices.length - higherLimitIndex]
+    for (let index = 0; index < laptopTb.rows.length ;index++){
+        let currCell = laptopTb.rows[index].cells[6];
+        if(window.getComputedStyle(currCell).backgroundColor === "rgb(239, 123, 123)"){
+            currCell.style.backgroundColor = "transparent";
+        }
+        if (parseFloat(currCell.innerHTML) >= higherLimit){
+            currCell.style.backgroundColor = "rgb(239, 123, 123)";
+        }
+    }
+}
+
+function markLowerPrices(){
+    let perc = parseFloat(lowerPriceInput.value)
+    let lowerLimitIndex = ((perc*orderedPrices.length)/100).toFixed(0) - 1;
+    let lowerLimit = orderedPrices[lowerLimitIndex]
+    for (let index = 0; index < laptopTb.rows.length ;index++){
+        let currCell = laptopTb.rows[index].cells[6];
+        if(window.getComputedStyle(currCell).backgroundColor === "rgb(236, 236, 125)"){
+            currCell.style.backgroundColor = "transparent";
+        }
+        if (parseFloat(currCell.innerHTML) <= lowerLimit){
+            currCell.style.backgroundColor = "rgb(236, 236, 125)";
+        }
+    }
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
+    laptopTb = document.getElementById("laptops-tbody");
+    laptopTbCont = document.getElementById("laptops-table-container");
+    laptopTbLoaing = document.getElementById("laptops-table-loading");
+    higherPriceInput = document.getElementById("higher-price-input");
+    lowerPriceInput = document.getElementById("lower-price-input");
+    queryForm = document.getElementById("query-form");
+    queryForm.addEventListener("submit", event => { event.preventDefault(); })
     await reloadData();
 }, false);
