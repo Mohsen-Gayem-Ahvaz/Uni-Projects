@@ -17,7 +17,7 @@ async function download_csv(url) {
 }
 
 async function reloadData(){
-    let csvResp = download_csv(laptopInfoUrls[0]);
+    let csvResp = download_csv(laptopInfoUrls[1]);
 
     await csvResp.then((value) => {
         laptopTb = document.getElementById("laptops-tbody");
@@ -34,7 +34,7 @@ async function reloadData(){
         }
     })
 }
-
+reloadData()
 window.addEventListener("DOMContentLoaded", function() {
-    reloadData()
+    // reloadData()
 }, false);
