@@ -6,6 +6,7 @@ const laptopInfoUrls = [
 ];
 var laptopTb;
 var laptopTbCont;
+var laptopTbLoaing
 var laptopData = [];
 
 async function download_csv(url) {
@@ -19,11 +20,14 @@ async function download_csv(url) {
 
 async function reloadData(){
     let csvResp = download_csv(laptopInfoUrls[0]);
-
     await csvResp.then((value) => {
+        if (value.errors.length > 0){
+            console.log(value.errors)
+            return;
+        }
         laptopTb = document.getElementById("laptops-tbody");
         laptopTbCont = document.getElementById("laptops-table-container");
-        laptopTbCont.style.display = "none";
+        laptopTbLoaing = document.getElementById("laptops-table-loading");
         laptopData = value.data;
         laptopData.shift();
         laptopData.pop();
@@ -35,7 +39,10 @@ async function reloadData(){
                 currRow.insertCell(cell+1).innerHTML = laptopData[index][cell];
             }
         }
+        laptopTbLoaing.style.display = "none";
         laptopTbCont.style.display = "block";
+    }).catch(err => {
+        console.log(err)
     })
 }
 
